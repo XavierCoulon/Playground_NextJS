@@ -1,14 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import React from "react";
-
-type Book = {
-  id: string;
-  title: string;
-  content: string;
-  categoryId: string;
-  author: string;
-};
+import { Book } from "../../types/global";
 
 function Books({ data }) {
   return (
@@ -33,6 +26,6 @@ function Books({ data }) {
 export default Books;
 
 export async function getServerSideProps() {
-  const { data } = await axios.get("http://localhost:5000/api/v1/book");
+  const { data } = await axios.get<Book[]>("http://localhost:5000/api/v1/book");
   return { props: { data } };
 }

@@ -18,7 +18,7 @@ function EditBook({ props }) {
 
   const { mutate } = useMutation(
     (data) =>
-      axios.put(`http://localhost:5000/api/v1/book/${data.id}`, {
+      axios.put(`http://localhost:5000/api/v1/book/${props.id}`, {
         title: data.title,
         content: data.content,
         picture: data.picture,

@@ -1,7 +1,13 @@
 import axios from "axios";
+import { GetStaticProps } from "next";
 import EditBook from "../../../components/EditBook";
+import { Book } from "../../../types/global";
 
-export default function BookDetails({ data }) {
+type TProps = {
+  data: Book[];
+};
+
+export default function BookDetails({ data }: TProps) {
   return (
     <>
       <EditBook props={data} />
@@ -10,15 +16,15 @@ export default function BookDetails({ data }) {
 }
 
 // getServerSideProps or getStaticProps
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await axios.get(
     `http://localhost:5000/api/v1/book/${params.id}`
   );
   return { props: { data } };
-}
+};
 
 export async function getStaticPaths() {
-  const { data } = await axios.get("http://localhost:5000/api/v1/book");
+  const { data } = await axios.get<Book[]>("http://localhost:5000/api/v1/book");
   return {
     paths: data.map((book) => ({
       params: {
