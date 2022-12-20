@@ -1,7 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
 import React from "react";
-import CreateBook from "../../components/CreateBook";
 
 type Book = {
   id: string;

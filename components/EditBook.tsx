@@ -33,8 +33,8 @@ function EditBook({ props }) {
   );
 
   const onSubmit = (data) => {
-    console.log(data);
-    // mutate(data);
+    // console.log(data);
+    mutate(data);
   };
 
   const fetchCategories = async () => {
@@ -52,11 +52,12 @@ function EditBook({ props }) {
   useEffect(() => {
     fetchCategories();
     fetchAuthors();
-    window.setTimeout(() => {
-      setValue("categoryId", props.categoryId);
-      setValue("authorId", props.authorId);
-    }, 500);
   }, []);
+
+  useEffect(() => {
+    setValue("categoryId", props.categoryId);
+    setValue("authorId", props.authorId);
+  }, [categories]);
 
   return (
     <>
@@ -116,7 +117,6 @@ function EditBook({ props }) {
           <select
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="author-select"
-            defaultValue={props.authorId}
             {...register("authorId")}
           >
             {authors.map((author) => (
